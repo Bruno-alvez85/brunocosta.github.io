@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Cores do Veículo & Calculadora de Idade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #0056b3;
+        }
+
+        .secao-veiculo, .secao-idade {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .opcoes-cores button {
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.branco { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; }
+        button.branco:hover { background-color: #e0e0e0; }
+
+        button.azul { background-color: #007bff; }
+        button.azul:hover { background-color: #0056b3; }
+
+        button.vermelho { background-color: #dc3545; }
+        button.vermelho:hover { background-color: #c82333; }
+
+        button.preto { background-color: #343a40; }
+        button.preto:hover { background-color: #23272b; }
+
+        button.amarelo { background-color: #ffc107; color: #333; }
+        button.amarelo:hover { background-color: #e0a800; }
+
+        button.verde { background-color: #28a745; }
+        button.verde:hover { background-color: #218838; }
+
+        .imagem-carro {
+            width: 80%;
+            max-width: 500px;
+            height: auto;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .secao-idade button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .secao-idade button:hover {
+            background-color: #5a6268;
+        }
+
+        #resultadoIdade {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Botão homepage */
+        .btn-home {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px auto 0 auto;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-home:hover {
+            background-color: #2176b5;
+            transform: translateY(-2px);
+        }
+
+        .footer-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="secao-veiculo">
+        <h1>Selecione a Cor do Seu Veículo</h1>
+        <div class="opcoes-cores">
+            <button onclick="mudarCor('branco')" class="branco">Branco</button>
+            <button onclick="mudarCor('azul')" class="azul">Azul</button>
+            <button onclick="mudarCor('vermelho')" class="vermelho">Vermelho</button>
+            <button onclick="mudarCor('preto')" class="preto">Preto</button>
+            <button onclick="mudarCor('amarelo')" class="amarelo">Amarelo</button>
+            <button onclick="mudarCor('verde')" class="verde">Verde</button>
+        </div>
+        <img id="imagemCarro" src="imagens/carro_branco.png" alt="Carro Branco" class="imagem-carro">
+        <p>Cor atual: <span id="corAtual">Branco</span></p>
+    </div>
+
+    <div class="secao-idade">
+        <h2>Descubra o Seu Ano de Nascimento</h2>
+        <button onclick="calcularAnoNascimento()">Calcular Ano de Nascimento</button>
+        <p id="resultadoIdade"></p>
+    </div>
+
+    <!-- Botão para voltar à homepage -->
+    <div class="footer-btn">
+        <a href="D:\bruno\fac\mestrado.ess\PEBD\homepage\index.html.html" class="btn-home">Voltar à Homepage</a>
+    </div>
+
+    <script>
+        // Função para mudar a cor do veículo
+        function mudarCor(cor) {
+            const imagemCarro = document.getElementById('imagemCarro');
+            const corAtualSpan = document.getElementById('corAtual');
+
+            imagemCarro.src = `imagens/carro_${cor}.png`;
+            imagemCarro.alt = `Carro ${cor.charAt(0).toUpperCase() + cor.slice(1)}`;
+            corAtualSpan.textContent = cor.charAt(0).toUpperCase() + cor.slice(1);
+        }
+
+        // Função para calcular o ano de nascimento
+        function calcularAnoNascimento() {
+            let idade = prompt("Por favor, digite a sua idade:");
+
+            if (idade === null || idade.trim() === "" || isNaN(idade)) {
+                alert("Por favor, digite uma idade válida.");
+                return;
+            }
+
+            idade = parseInt(idade);
+            const anoAtual = new Date().getFullYear();
+            const anoNascimento = anoAtual - idade;
+
+            const resultadoIdade = document.getElementById('resultadoIdade');
+            resultadoIdade.textContent = `Você provavelmente nasceu em ${anoNascimento}.`;
+        }
+    </script>
+    
+
+</body>
+</html>
